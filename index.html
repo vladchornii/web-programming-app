@@ -65,8 +65,30 @@
     </section>
   </main>
 
-  <footer class="animated fade-in">
+  <div id="feedbackModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Feedback</h2>
+      <form id="feedbackForm" action="https://formspree.io/f/xpwpgozg" method="POST">
+          <label>Name: <input type="text" name="name" required></label>
+          <label>Email: <input type="email" name="email" required></label>
+          <label>Phone: <input type="tel" name="phone" required></label>
+          <label>Message: <textarea name="message" required></textarea></label>
+          <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <button id="themeToggle">Toggle Theme</button>
+  <div id="comments" class="card fade-in"><h3>Employer Comments</h3><ul id="commentList"></ul></div>
+
+  <footer id="footer-info" class="animated fade-in">
     <p>© Vladyslav Chornii, 2025</p>
+    <div id="browser-info"></div>
   </footer>
+
+  <button id="openModalBtn" class="feedback-button">Feedback</button>
+
+  <script src="script.js"></script>
 </body>
 </html>
