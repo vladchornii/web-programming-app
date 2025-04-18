@@ -46,7 +46,7 @@ if (browserInfoElement) {
 }
 
 // 2. Load comments
-fetch('https://jsonplaceholder.typicode.com/posts/3/comments')
+fetch('https://jsonplaceholder.typicode.com/posts/5/comments')
   .then(res => res.json())
   .then(comments => {
     const list = document.getElementById('commentList');

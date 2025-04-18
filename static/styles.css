@@ -19,7 +19,7 @@ header, footer {
   animation: fadeIn 2s ease-in-out;
 }
 
-h1, h2 {
+h1, h2, h3 {
   margin: 0.2em 0;
   color: #fff;
 }
@@ -45,7 +45,24 @@ main {
 
 body.dark-theme .card {
   background-color: #1e1e1e;
-  border-color: #333;
+}
+
+#comments {
+  margin-top: 1rem;
+}
+
+#commentList {
+  padding-left: 1.2rem;
+}
+
+#commentList li {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#commentList li:last-child {
+  border-bottom: none;
 }
 
 a {
@@ -60,10 +77,6 @@ body.dark-theme a {
 
 a:hover {
   text-decoration: underline;
-}
-
-ul {
-  padding-left: 1.2rem;
 }
 
 /* Animations */

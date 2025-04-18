@@ -12,7 +12,7 @@
       <img src="IMG.JPG" alt="Vladyslav Chornii" class="profile-photo">
       <div class="header-info">
         <h1>Vladyslav Chornii</h1>
-        <h2>Trainee DevOps Engineer</h2>
+        <h2>Junior DevOps Engineer</h2>
         <p><strong>Phone:</strong> +380970613363</p>
         <p><strong>Email:</strong> <a href="mailto:vladchorniy1@gmail.com">vladchorniy1@gmail.com</a></p>
         <p><strong>Location:</strong> Lviv, Ukraine</p>
@@ -63,24 +63,32 @@
       Lviv Polytechnic National University<br>
       <strong>Sep 2022 - Jul 2026</strong></p>
     </section>
+
+    <div id="comments" class="card fade-in">
+      <h3>Employer Comments</h3>
+      <ul id="commentList"></ul>
+    </div>
   </main>
 
   <div id="feedbackModal" class="modal hidden">
     <div class="modal-content">
       <span class="close-button">&times;</span>
       <h2>Feedback</h2>
-      <form id="feedbackForm" action="https://formspree.io/f/xpwpgozg" method="POST">
-          <label>Name: <input type="text" name="name" required></label>
-          <label>Email: <input type="email" name="email" required></label>
-          <label>Phone: <input type="tel" name="phone" required></label>
-          <label>Message: <textarea name="message" required></textarea></label>
-          <button type="submit">Send</button>
+      <form id="feedbackForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">Send</button>
       </form>
     </div>
   </div>
 
   <button id="themeToggle">Toggle Theme</button>
-  <div id="comments" class="card fade-in"><h3>Employer Comments</h3><ul id="commentList"></ul></div>
 
   <footer id="footer-info" class="animated fade-in">
     <p>© Vladyslav Chornii, 2025</p>
