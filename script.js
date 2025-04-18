@@ -13,7 +13,6 @@ localStorage.setItem('browserInfo', JSON.stringify(browserInfo));
 
 const browserInfoElement = document.getElementById('browser-info');
 if (browserInfoElement) {
-  // Parse user agent to get browser name
   let browserName = 'Unknown Browser';
   const userAgent = navigator.userAgent.toLowerCase();
   
@@ -23,17 +22,14 @@ if (browserInfoElement) {
   else if (userAgent.includes('edge')) browserName = 'Microsoft Edge';
   else if (userAgent.includes('opera')) browserName = 'Opera';
   
-  // Parse platform to get OS name
   let osName = 'Unknown OS';
   if (navigator.platform.includes('Win')) osName = 'Windows';
   else if (navigator.platform.includes('Mac')) osName = 'MacOS';
   else if (navigator.platform.includes('Linux')) osName = 'Linux';
   
-  // Format language for display
   const languageNames = new Intl.DisplayNames(['en'], { type: 'language' });
   const displayLanguage = languageNames.of(navigator.language) || navigator.language;
   
-  // Create user-friendly display
   browserInfoElement.innerHTML = `
     <div class="browser-info-container">
       <h4>Your Browser Information</h4>
@@ -48,8 +44,9 @@ if (browserInfoElement) {
     </div>
   `;
 }
+
 // 2. Load comments
-fetch('https://jsonplaceholder.typicode.com/posts/31/comments')
+fetch('https://jsonplaceholder.typicode.com/posts/3/comments')
   .then(res => res.json())
   .then(comments => {
     const list = document.getElementById('commentList');
@@ -65,22 +62,65 @@ setTimeout(() => {
   document.getElementById('feedbackModal')?.classList.remove('hidden');
 }, 60000);
 
-// 4. Theme toggle
-const toggleBtn = document.getElementById('themeToggle');
-toggleBtn?.addEventListener('click', () => {
-  document.body.classList.toggle('dark-theme');
-  localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+// 4. Theme management with time-based auto-switching
+function setThemeBasedOnTime() {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const isDayTime = currentHour >= 7 && currentHour < 21;
+  
+  if (localStorage.getItem('theme') === null) {
+    if (isDayTime) {
+      document.body.classList.remove('dark-theme');
+    } else {
+      document.body.classList.add('dark-theme');
+    }
+  }
+}
+
+function updateToggleButton() {
+  const toggleBtn = document.getElementById('themeToggle');
+  if (!toggleBtn) return;
+  
+  const savedTheme = localStorage.getItem('theme');
+  toggleBtn.classList.remove('auto-mode', 'light-mode', 'dark-mode');
+  
+  if (savedTheme === null) {
+    toggleBtn.classList.add('auto-mode');
+    toggleBtn.textContent = 'Toggle Theme (Auto)';
+  } else if (savedTheme === 'light') {
+    toggleBtn.classList.add('light-mode');
+    toggleBtn.textContent = 'Toggle Theme (Light)';
+  } else {
+    toggleBtn.classList.add('dark-mode');
+    toggleBtn.textContent = 'Toggle Theme (Dark)';
+  }
+}
+
+// Initialize theme on load
+window.addEventListener('load', () => {
+  setThemeBasedOnTime();
+  updateToggleButton();
+  
+  // Check every minute to update theme if needed
+  setInterval(setThemeBasedOnTime, 60000);
 });
 
-// Initialize theme
-window.addEventListener('load', () => {
-  const hour = new Date().getHours();
-  const saved = localStorage.getItem('theme');
-  if (saved) {
-    if (saved === 'dark') document.body.classList.add('dark-theme');
-  } else if (hour < 7 || hour >= 21) {
+// Theme toggle button
+document.getElementById('themeToggle')?.addEventListener('click', () => {
+  const hasDarkClass = document.body.classList.contains('dark-theme');
+  
+  if (localStorage.getItem('theme') === null) {
+    localStorage.setItem('theme', 'dark');
     document.body.classList.add('dark-theme');
+  } else if (localStorage.getItem('theme') === 'dark') {
+    localStorage.setItem('theme', 'light');
+    document.body.classList.remove('dark-theme');
+  } else {
+    localStorage.removeItem('theme');
+    setThemeBasedOnTime();
   }
+  
+  updateToggleButton();
 });
 
 // Modal handling

@@ -4,7 +4,12 @@ body {
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: #f4f4f4;
   line-height: 1.6;
-  transition: background 0.3s ease;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+body.dark-theme {
+  background: #121212;
+  color: #e0e0e0;
 }
 
 header, footer {
@@ -35,11 +40,22 @@ main {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   animation: popIn 0.8s ease forwards;
   backdrop-filter: blur(5px);
+  transition: background-color 0.5s ease;
+}
+
+body.dark-theme .card {
+  background-color: #1e1e1e;
+  border-color: #333;
 }
 
 a {
   color: #ffd700;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+body.dark-theme a {
+  color: #90caf9;
 }
 
 a:hover {
@@ -107,6 +123,7 @@ ul {
   object-fit: cover;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   border: 4px solid #fff;
+  transition: all 0.3s ease;
 }
 
 .header-info {
@@ -125,21 +142,6 @@ ul {
   }
 }
 
-/* Dark Theme */
-body.dark-theme {
-  background: #121212;
-  color: #e0e0e0;
-}
-
-body.dark-theme .card {
-  background-color: #1e1e1e;
-  border-color: #333;
-}
-
-body.dark-theme a {
-  color: #90caf9;
-}
-
 /* Theme Toggle Button */
 #themeToggle {
   position: fixed;
@@ -152,11 +154,21 @@ body.dark-theme a {
   border-radius: 0.5rem;
   cursor: pointer;
   z-index: 999;
+  transition: all 0.3s ease;
 }
 
-body.dark-theme #themeToggle {
+#themeToggle.auto-mode {
+  background: #555;
+}
+
+#themeToggle.light-mode {
   background: #ddd;
   color: #000;
+}
+
+#themeToggle.dark-mode {
+  background: #222;
+  color: #fff;
 }
 
 /* Modal Styles */
@@ -189,9 +201,10 @@ body.dark-theme #themeToggle {
   width: 90%;
   max-width: 500px;
   position: relative;
+  transition: all 0.3s ease;
 }
 
-.dark-theme .modal-content {
+body.dark-theme .modal-content {
   background: #222;
   color: #fff;
 }
@@ -208,6 +221,14 @@ body.dark-theme #themeToggle {
   margin-bottom: 1rem;
   border-radius: 0.3rem;
   border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+body.dark-theme .modal-content input,
+body.dark-theme .modal-content textarea {
+  background: #333;
+  color: #fff;
+  border-color: #555;
 }
 
 .modal-content button {
@@ -217,6 +238,7 @@ body.dark-theme #themeToggle {
   border: none;
   border-radius: 0.3rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .close-button {
@@ -225,6 +247,7 @@ body.dark-theme #themeToggle {
   right: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 /* Footer */
@@ -239,25 +262,8 @@ footer#footer-info {
 #browser-info {
   margin-top: 1rem;
   font-size: 0.8rem;
-  white-space: pre-wrap;
 }
 
-/* Feedback Button */
-.feedback-button {
-  position: fixed;
-  bottom: 60px;
-  right: 20px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  z-index: 999;
-}
-
-/* Browser Info Styles */
 .browser-info-container {
   background: rgba(255,255,255,0.1);
   padding: 1rem;
@@ -290,4 +296,24 @@ footer#footer-info {
 .browser-info-container strong {
   color: #ffd700;
   margin-right: 0.5rem;
+}
+
+/* Feedback Button */
+.feedback-button {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.feedback-button:hover {
+  background-color: #0056b3;
 }
